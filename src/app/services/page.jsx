@@ -101,7 +101,7 @@ export default function Services() {
   ];
 
   return (
-    <div className="p-6  lg:pt-155 grid gap-6 md:grid-cols-2  lg:grid-cols-4">
+    <div className="p-6  lg:pt-12 grid gap-6 md:grid-cols-2  lg:grid-cols-4">
       {servicePackages.map((service) => (
         <div
           key={service._id}

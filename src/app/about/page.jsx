@@ -14,7 +14,9 @@ export default function About() {
   return (
     <div>
       {" "}
-      <p>This is About page</p>
+      <p>This is About page
+
+      </p>
       <p>
         <Link href="/about/address"> Address page </Link>
       </p>
