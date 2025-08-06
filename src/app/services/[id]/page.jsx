@@ -100,15 +100,21 @@ export default function ServicesDetailsPage({ params }) {
   ];
   const id = params.id;
   const service = servicePackages.find((item) => item._id === id);
-  return (
-    <div className="p-6 max-w-2xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">{service.service_name}</h1>
-      <img
-        src={service.service_image}
-        alt={service.service_name}
-        className="w-full h-64 object-cover rounded-lg mb-4"
-      />
-      <p className="text-gray-700">{service.service_description}</p>
-    </div>
-  );
+  if (service) {
+    return (
+      <div className="p-6 max-w-2xl mx-auto">
+        <h1 className="text-2xl font-bold mb-4">{service.service_name}</h1>
+        <img
+          src={service.service_image}
+          alt={service.service_name}
+          className="w-full h-64 object-cover rounded-lg mb-4"
+        />
+        <p className="text-gray-700">{service.service_description}</p>
+      </div>
+    );
+  } else {
+    return <> <div>
+      data not found 
+      </div> </>;
+  }
 }
