@@ -8,7 +8,7 @@ export default function Navbar() {
 if(!pathName.includes("dashboard")){
    return (
     <div className="w-full mb-4 bg-base-100 bg-gray-200 text-sky-500 shadow-sm fixed top-0 z-50 ">
-      <div className="navbar-start">
+      <div className="navbar-start ">
         <div className="dropdown">
           <div
             tabIndex={0}
@@ -51,7 +51,7 @@ if(!pathName.includes("dashboard")){
         </div>
       </div>
       {/* desktop mood  */}
-      <div className="navbar-center  hidden  justify-center mt-2  lg:flex">
+      <div className="navbar-center  hidden  justify-center mt-2   lg:flex">
         <ul className="menu menu-horizontal gap-12  flex px-1">
           <li>
             <Link href={"/"}> Home</Link>
@@ -63,7 +63,7 @@ if(!pathName.includes("dashboard")){
               <Link href={"/services"}> Services </Link>
             </li>
           <li>
-            <Link href={" "}> Contact</Link>
+            <Link href={"/posts"}> Posts</Link>
           </li>
         </ul>
       </div>
