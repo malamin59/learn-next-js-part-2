@@ -7,7 +7,7 @@ export default function Navbar() {
   const pathName = usePathname();
 if(!pathName.includes("dashboard")){
    return (
-    <div className="w-full mb-4 bg-base-100 bg-gray-200 text-sky-500 shadow-sm fixed top-0 z-50 ">
+    <div className="w-full mb bg-base-100 bg-gray-200 text-sky-500 shadow-sm fixed top-0 z-50 ">
       <div className="navbar-start ">
         <div className="dropdown">
           <div
@@ -33,7 +33,7 @@ if(!pathName.includes("dashboard")){
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100  lg:hidden rounded-box z-1 mt-3 w-52 p-2 shadow"
+            className="menu menu-sm dropdown-content bg-base-100  lg:hidden rounded-box z-1 mt-3  p-2 shadow"
           >
             <li>
               <Link href={"/"}> Home</Link>
@@ -47,6 +47,9 @@ if(!pathName.includes("dashboard")){
             <li>
               <Link href={"/"}> Contact</Link>
             </li>
+             <li>
+            <Link href={"/posts"}> Posts</Link>
+          </li>
           </ul>
         </div>
       </div>
