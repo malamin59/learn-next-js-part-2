@@ -24,3 +24,7 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+.test {
+  color: #2da3d1;
+  background-color: rgb(13, 16, 218);
+}

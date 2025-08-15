@@ -1,5 +1,6 @@
 import Link from "next/link";
 import React from "react";
+import style from './post.module.css'
 
 export const getPost = async () => {
   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
@@ -11,14 +12,14 @@ export default async function Posts() {
   const posts = await getPost();
 
   return (
-    <div className="mt-10 px-4">
+    <div className="mt-10 px-4 test">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {posts.map((post) => (
           <div
             key={post.id}
             className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
           >
-            <h2 className="text-xl font-semibold text-gray-800 mb-2">
+            <h2 className={`${style["post-title"]}`}>
               {post.title}
             </h2>
             <p className="text-gray-600">{post.body}</p>
