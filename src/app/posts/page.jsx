@@ -1,11 +1,17 @@
 import Link from "next/link";
 import React from "react";
-import style from './post.module.css'
+import style from "./post.module.css";
 
 export const getPost = async () => {
   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
   const data = await res.json();
   return data;
+};
+export const metadata = {
+  title: {
+    default: "all post ",
+  },
+  description: "loading json Pleas holder",
 };
 
 export default async function Posts() {
@@ -19,14 +25,14 @@ export default async function Posts() {
             key={post.id}
             className="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-shadow"
           >
-            <h2 className={`${style["post-title"]}`}>
-              {post.title}
-            </h2>
+            <h2 className={`${style["post-title"]}`}>{post.title}</h2>
             <p className="text-gray-600">{post.body}</p>
             <p className="text-sm text-gray-400 mt-3">Post ID: {post.id}</p>
             <Link href={`/posts/${post.id}`}>
               {" "}
-              <button className="btn bg-sky-400 p-2 rounded-3xl">Details</button>
+              <button className="btn bg-sky-400 p-2 rounded-3xl">
+                Details
+              </button>
             </Link>
           </div>
         ))}

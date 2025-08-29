@@ -1,24 +1,35 @@
 import React from "react";
+import NotFoundMeal from "../components/NotFoundMeal";
 
+
+export const getSingleMeal = async (meal_id) => {
+  const res = await fetch(
+    `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal_id}`
+  );
+
+  if (!res.ok) throw new Error("Failed to fetch meal");
+
+  const data = await res.json();
+  return data?.meals?.[0] || null;
+};
+
+export async function generateMetadata({ params }) {
+  const { id } = params;
+  const meal = await getSingleMeal(id);
+
+  return {
+    title: meal?.strMeal || "Meal Not Found",
+    description: meal?.strInstructions?.slice(0, 150) || "No description available",
+  };
+}
+
+// ✅ Page Component
 export default async function SingleMealPage({ params }) {
   const { id } = params;
-
-  const fetchMeal = async () => {
-    try {
-      const res = await fetch(
-        `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
-      );
-      const data = await res.json();
-      return data?.meals?.[0] || null;
-    } catch (error) {
-      console.error(error);
-      return null;
-    }
-};
-const meal = await fetchMeal();
+  const meal = await getSingleMeal(id);
 
   if (!meal) {
-    return <p className="text-center text-red-500">No Meal Fount </p>;
+    return <NotFoundMeal/>
   }
 
   return (
@@ -35,9 +46,7 @@ const meal = await fetchMeal();
       <p className="text-gray-600">Area: {meal.strArea || "N/A"}</p>
 
       <h2 className="text-xl font-semibold mt-6">Instructions</h2>
-      <p className="mt-2 text-gray-700 leading-relaxed ">
-        {meal.strInstructions}
-      </p>
+      <p className="mt-2 text-gray-700 leading-relaxed">{meal.strInstructions}</p>
     </div>
   );
 }

@@ -1,5 +1,13 @@
 import Link from "next/link";
 import MealSearch from "./components/MealSearch";
+import NotFoundMeal from "./components/NotFoundMeal";
+
+export const metadata = {
+  title: {
+    default: "all meals ",
+  },
+  description: "loading json Pleas holder",
+};
 
 export default async function MealsPage({ searchParams }) {
   const query = await searchParams;
@@ -22,11 +30,11 @@ export default async function MealsPage({ searchParams }) {
 
   return (
     <div className="mt-12 px-4">
-      {/* <Link href={`/meals/${meal.idMeal}`}> */}
       <MealSearch />
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {meals.length > 0 ? (
-          meals.map((meal) => (
+
+      {meals.length > 0 ? (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {meals.map((meal) => (
             <div
               key={meal.idMeal}
               className="border rounded-lg shadow p-4 hover:shadow-lg transition"
@@ -46,14 +54,11 @@ export default async function MealsPage({ searchParams }) {
                 Area: {meal.strArea || "N/A"}
               </p>
             </div>
-          ))
-        ) : (
-          <p className="text-gray-500 col-span-full text-center">
-            No meals found.
-          </p>
-        )}
-      </div>
-      {/* </Link> */}
+          ))}
+        </div>
+      ) : (
+        <NotFoundMeal />
+      )}
     </div>
   );
 }
