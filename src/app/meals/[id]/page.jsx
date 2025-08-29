@@ -2,6 +2,7 @@ import React from "react";
 import NotFoundMeal from "../components/NotFoundMeal";
 
 
+
 export const getSingleMeal = async (meal_id) => {
   const res = await fetch(
     `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${meal_id}`
@@ -12,6 +13,7 @@ export const getSingleMeal = async (meal_id) => {
   const data = await res.json();
   return data?.meals?.[0] || null;
 };
+
 
 export async function generateMetadata({ params }) {
   const { id } = params;
@@ -46,7 +48,7 @@ export default async function SingleMealPage({ params }) {
       <p className="text-gray-600">Area: {meal.strArea || "N/A"}</p>
 
       <h2 className="text-xl font-semibold mt-6">Instructions</h2>
-      <p className="mt-2 text-gray-700 leading-relaxed">{meal.strInstructions}</p>
+      <p className="mt-2 text-white  leading-relaxed">{meal.strInstructions}</p>
     </div>
   );
 }

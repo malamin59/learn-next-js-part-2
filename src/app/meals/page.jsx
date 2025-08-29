@@ -1,13 +1,19 @@
 import Link from "next/link";
 import MealSearch from "./components/MealSearch";
 import NotFoundMeal from "./components/NotFoundMeal";
-
+import Image from "next/image";
+import { Roboto } from "next/font/google";
 export const metadata = {
   title: {
     default: "all meals ",
   },
   description: "loading json Pleas holder",
 };
+
+const roboto = Roboto({
+  weight: ["400"],
+  subsets: ["latin"],
+});
 
 export default async function MealsPage({ searchParams }) {
   const query = await searchParams;
@@ -37,14 +43,22 @@ export default async function MealsPage({ searchParams }) {
           {meals.map((meal) => (
             <div
               key={meal.idMeal}
-              className="border rounded-lg shadow p-4 hover:shadow-lg transition"
+              className={`border rounded-lg shadow p-4 hover:shadow-lg transition ${roboto.className}`}
             >
               <Link href={`/meals/${meal.idMeal}`}>
-                <img
-                  src={meal.strMealThumb}
-                  alt={meal.strMeal}
-                  className="w-full h-48 object-cover rounded"
-                />
+                {meal?.strMealThumb ? ( 
+                  <Image
+                    width={200}
+                    height={320}
+                    src={meal.strMealThumb}
+                    alt={meal.strMeal || "Meal"}
+                    className="w-full h-48 object-cover rounded"
+                  />
+                ) : (
+                  <div className="w-full h-48 bg-gray-200 rounded flex items-center justify-center">
+                    <span className="text-gray-500">No Image</span>
+                  </div>
+                )}
               </Link>
               <h2 className="text-lg font-bold mt-2">{meal.strMeal}</h2>
               <p className="text-sm text-gray-600">
