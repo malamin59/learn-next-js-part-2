@@ -77,6 +77,9 @@ export default function Navbar() {
             <li>
               <Link href={"/products"}>Products</Link>
             </li>
+            <li>
+              <Link href={"/products/add"}>Add Product</Link>
+            </li>
           </ul>
         </div>
       </div>

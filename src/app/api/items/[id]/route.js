@@ -6,7 +6,7 @@ import { ObjectId } from "mongodb";
 export async function GET(req, { params }) {
   try {
     const { id } = params;
-    const collection = await dbConnect("portfolio_comments");
+    const collection = await dbConnect("my-comment");
     const filter = { _id: new ObjectId(id) };
     const result = await collection.findOne(filter);
     return Response.json({ success: true, data: result }, { status: 200 });

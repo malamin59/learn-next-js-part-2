@@ -1,12 +1,13 @@
 import { dbConnect } from "@/lib/dbConnect";
 import handleApiError from "../components/ApiError";
+import { revalidatePath } from "next/cache";
 export const dynamic = "force-static";
 
 // create a dynamic error fot tall catch block
 
 export async function GET(req) {
   try {
-    const collection = await dbConnect("portfolio_comments");
+    const collection = await dbConnect("my-comment");
     const result = await collection.find().toArray();
     return Response.json({ result });
   } catch (error) {
@@ -26,6 +27,7 @@ export async function POST(req) {
     const collection = await dbConnect("my-comment");
     // insert the posted data of mongoDB ;
     const result = await collection.insertOne(body);
+    revalidatePath('/products')
     // return a successful message
     return Response.json(
       {
