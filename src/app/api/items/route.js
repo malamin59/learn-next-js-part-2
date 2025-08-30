@@ -1,31 +1,40 @@
 import { dbConnect } from "@/lib/dbConnect";
+import handleApiError from "../components/ApiError";
 export const dynamic = "force-static";
 
-// GET request handler
-export async function GET() {
-  const collection = await dbConnect("portfolio_comments");
-  const data = await collection.find().toArray();
-  return Response.json({ data });
-}
+// create a dynamic error fot tall catch block
 
-// POST request handler
-// export async function POST(req) {
-//   const postedDat = await req.json();
-//   return Response.json({ postedDat });
-// }
-
-export async function POST(req) {
+export async function GET(req) {
   try {
-    const body = await req.json();
     const collection = await dbConnect("portfolio_comments");
-    const result = await collection.insertOne(body);
-    return Response.json({
-      message: "Data inserted successfully EPB",
-      insertedId: result.insertedId,
-    });
+    const result = await collection.find().toArray();
+    return Response.json({ result });
   } catch (error) {
-    return Response.json({ error: error.message }, { status: 500 });
+    return handleApiError("failed to get route ");
   }
 }
 
 
+/* CREATE A POST REQUEST */
+export async function POST(req) {
+  try {
+    // Call req.json() -- for converted the data in javaScript object
+    const body = await req.json();
+    // saved the post time use new Date();
+    body.createAt = new Date();
+    // post the data of a collection
+    const collection = await dbConnect("my-comment");
+    // insert the posted data of mongoDB ;
+    const result = await collection.insertOne(body);
+    // return a successful message
+    return Response.json(
+      {
+        message: "Data sent successfully!",
+        insertedId: result.insertedId,
+      },
+      { status: 200 }
+    );
+  } catch (error) {
+    return handleApiError("Failed to post request");
+  }
+}
