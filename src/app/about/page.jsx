@@ -18,26 +18,26 @@ import epv from "../../../public/epb.png";
 
 export default function About() {
   return (
-    <div className="relative bg-gradient-to-r from-indigo-900 via-blue-800 to-sky-800 text-white rounded-2xl shadow-lg p-6 flex flex-col md:flex-row items-center gap-6 max-w-5xl mx-auto mt-10 overflow-hidden">
-    <div className="absolute -mt-40 opacity-90">
+    <div className="relative bg-gradient-to-r from-indigo-900 via-blue-800 to-sky-800 text-white rounded-2xl shadow-lg p-14 flex flex-col md:flex-row items-center gap-6 max-w-5xl mx-auto mt-10 overflow-hidden">
+    <div className="absolute -mt-32 opacity-90">
   <Image 
     src={epv} 
     alt="Logo" 
-    width={80} 
-    height={80} 
+    width={70} 
+    height={70} 
     className="rounded-full object-cover" 
   />
 </div>
 
       {/* Left Content */}
-      <div className="flex-1 space-y-3 md:ml-22 relative z-10">
+      <div className="flex-1 space-y-1 md:ml-22 relative z-10">
         <h1 className="text-2xl md:text-3xl font-bold">AL AMIN PATWARY</h1>
         <p className="text-lg font-semibold">
           MERN Stack Developer | React | Tailwind CSS | Node.js | MongoDB
         </p>
 
         {/* Tech Icons */}
-        <div className="flex items-center gap-3 text-2xl">
+        <div className="flex items-center gap-5 text-2xl">
           <SiReact className="text-cyan-400" />
           <SiTailwindcss className="text-sky-400" />
           <SiMongodb className="text-green-500" />
@@ -48,7 +48,7 @@ export default function About() {
         </div>
 
         {/* Contact Info */}
-        <div className="space-y-2 text-sm md:text-base">
+        <div className="space-y-1 text-sm md:text-base">
           <p className="flex items-center gap-2">
             <FaWhatsapp className="text-green-500" /> +8801882412260
           </p>
