@@ -5,6 +5,7 @@ export const dynamic = "force-static";
 
 // create a dynamic error fot tall catch block
 
+
 export async function GET(req) {
   try {
     const collection = await dbConnect("my-comment");
@@ -15,7 +16,7 @@ export async function GET(req) {
   }
 }
 
-
+  
 /* CREATE A POST REQUEST */
 export async function POST(req) {
   try {

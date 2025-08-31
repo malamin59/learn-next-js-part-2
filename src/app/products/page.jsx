@@ -1,32 +1,40 @@
+import { dbConnect } from "@/lib/dbConnect";
 import React from "react";
+import { getProducts } from "../actions/products/getProducts";
 
 export const metadata = {
-  title: {
-    default: "All Products",
-  },
-  description: "Loading Products",
+  title: "All Products",
+  description: "Loading products",
 };
 
 export default async function ProductsPage() {
-  const res = await fetch("http://localhost:3000/api/items", {
-    cache: "force-cache",
-  });
-  const data = await res.json();
+  try {
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL;
+    const res = await fetch(`${baseUrl}/api/items`, { cache: "no-store" });
+    if (!res.ok) {
+      throw new Error("Failed to fetch products");
+    }
 
-  // Extract the array
-  const products = data.result;
 
-  if (!Array.isArray(products) || products.length === 0) {
-    return <p>No products found</p>;
+
+      const data = await res.json();
+    console.log(data)
+
+    return (
+      <div className="mt-12">
+        <h2 className="text-2xl font-bold mb-4">Products</h2>
+        <ul className="space-y-2">
+          {data.result?.map((product) => (
+            <li key={product._id} className="border p-2 rounded">
+              {product.name || product.productName}
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  } catch (err) {
+    return (
+      <div className="text-red-500">Error loading products: {err.message}</div>
+    );
   }
-
-  return (
-    <div className="mt-12">
-      <ul>
-        {products.map((product) => (
-          <li key={product._id}>{product.productName}</li>
-        ))}
-      </ul>
-    </div>
-  );
 }

@@ -35,7 +35,7 @@ export default function RootLayout({ children }) {
         className={` ${poppins} antialiased`}
       >
         <Navbar />
-        <main className="h-screen">
+        <main className="h-screen mt-12">
           {children}
         </main>
         <footer>Awesome Footer content</footer>
