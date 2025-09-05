@@ -39,6 +39,9 @@ export default function Navbar() {
             <li>
               <Link href="/products/add">Add Product</Link>
             </li>
+            <li>
+              <Link href="/register">Resister</Link>
+            </li>
           </ul>
         </div>
       </div>
