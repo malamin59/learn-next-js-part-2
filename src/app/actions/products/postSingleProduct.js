@@ -1,13 +1,13 @@
 "use server"
 
 import handleApiError from "@/app/api/components/ApiError";
-import { dbConnect } from "@/lib/dbConnect";
+import { collectionName, dbConnect } from "@/lib/dbConnect";
 import { revalidatePath } from "next/cache";
 
 export  const postSingleData = async () =>{
  try{
      const postedData = await req.json();
-  const result = await dbConnect("my-comment").insertOne(postedData);
+  const result = await dbConnect(collectionName.MY_COMMENT).insertOne(postedData);
   revalidatePath("/products");
   return result
  }

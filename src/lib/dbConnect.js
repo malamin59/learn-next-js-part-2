@@ -1,45 +1,35 @@
-import { MongoClient, ServerApiVersion } from "mongodb"; 
+import { MongoClient, ServerApiVersion } from "mongodb";
 // Import MongoDB driver and versioning API
 
-// Load MongoDB URI from .env file
-// Example: MONGO_URI=mongodb+srv://user:pass@cluster.mongodb.net/
-const uri = process.env.MONGO_URI; 
+export const collectionName = {
+  TEST_USER: "users-collection",
+  MY_COMMENT: "my-comment"
+};
 
-// Options for MongoClient (set server API version and enable stricter checks)
+const uri = process.env.MONGO_URI;
 const options = {
   serverApi: {
     version: ServerApiVersion.v1, // use stable API v1
-    strict: true,                 // throw error if using deprecated features
-    deprecationErrors: true,      // log errors for deprecated MongoDB commands
+    strict: true, // throw error if using deprecated features
+    deprecationErrors: true, // log errors for deprecated MongoDB commands
   },
 };
 
-// Declare variables for MongoClient instance and the promise of connecting
 let client;
 let clientPromise;
-
-// If no URI is provided, throw an error to avoid silent failure
 if (!uri) {
   throw new Error("Please add MONGO_URI to your .env.local");
 }
 
-/**
- * In development (next dev), Next.js hot-reloads the code on every change.
- * If we create a new MongoClient every reload, it opens too many connections.
- * To fix that, we reuse the same client by storing it in the global object.
- */
+
 if (process.env.NODE_ENV === "development") {
   if (!global._mongoClientPromise) {
-    // Create a new MongoClient with the URI + options
     client = new MongoClient(uri, options);
 
-    // Connect once and store the promise globally
     global._mongoClientPromise = client.connect();
   }
-  // Reuse the global client promise
   clientPromise = global._mongoClientPromise;
 } else {
-  // In production, just create a new client and connect normally
   client = new MongoClient(uri, options);
   clientPromise = client.connect();
 }
